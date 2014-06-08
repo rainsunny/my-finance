@@ -1,7 +1,7 @@
-package net.jay.web.controller;
+package net.jay.accounting.controller;
 
-import net.jay.web.service.Message;
-import net.jay.web.service.MessageService;
+import net.jay.accounting.service.Message;
+import net.jay.accounting.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

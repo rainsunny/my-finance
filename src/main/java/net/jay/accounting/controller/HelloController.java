@@ -1,4 +1,4 @@
-package net.jay.web.controller;
+package net.jay.accounting.controller;
 
 
 import org.springframework.stereotype.Controller;

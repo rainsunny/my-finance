@@ -1,4 +1,4 @@
-package net.jay.web.service;
+package net.jay.accounting.service;
 
 import org.springframework.stereotype.Service;
 

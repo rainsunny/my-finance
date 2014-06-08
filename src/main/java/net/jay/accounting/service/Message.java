@@ -1,4 +1,4 @@
-package net.jay.web.service;
+package net.jay.accounting.service;
 
 /**
  * Created by wangjie on 5/16/14 12:39 AM.
