@@ -1,4 +1,4 @@
-package net.jay.accounting.service;
+package net.jay.accounting.domain;
 
 import java.math.BigDecimal;
 import java.sql.Date;

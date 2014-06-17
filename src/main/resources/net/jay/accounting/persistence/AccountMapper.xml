@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.jay.accounting.persistence.AccountMapper">
+
+    <resultMap id="accountMap" type="Account">
+        <id property="id" column="account_id" />
+        <result property="name" column="account_name" />
+        <result property="desc" column="description" />
+        <result property="parentId" column="parent_id" />
+        <result property="balance" column="balance" />
+        <result property="accountType" column="account_type" />
+        <result property="accountState" column="account_state" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <insert id="insertAccount" parameterType="Account">
+        insert into tb_account
+        (account_id, account_name, description, balance, parent_id, account_type, create_time, account_state)
+        values
+        (#{id}, #{name}, #{desc, jdbcType=VARCHAR}, #{balance}, #{parentId, jdbcType=VARCHAR},
+        #{accountType}, #{createTime}, #{accountState})
+    </insert>
+
+    <select id="getAccount" parameterType="string" resultMap="accountMap">
+        select * from tb_account where account_id = #{accountId}
+    </select>
+
+    <select id="getAccountsBy" parameterType="string" resultMap="accountMap">
+        select * from tb_account where 1=1
+        <if test="type != null">
+            and account_type = #{type}
+        </if>
+        <if test="state != null">
+            and account_state = #{state}
+        </if>
+    </select>
+
+    <delete id="deleteAccount" parameterType="string">
+        delete from tb_account where account_id = #{accountId}
+    </delete>
+
+    <update id="updateAccount" parameterType="Account">
+        update tb_account
+        set account_name = #{name}, description = #{desc}, balance = #{balance},
+        parent_id = #{parentId, jdbcType=VARCHAR},
+        account_type = #{accountType}, account_state = #{accountState}
+        where account_id = #{id}
+    </update>
+
+    <select id="accountSeqNextVal" resultType="long">
+        select nextval('account_seq')
+    </select>
+
+</mapper>

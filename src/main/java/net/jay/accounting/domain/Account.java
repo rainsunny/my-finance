@@ -1,7 +1,7 @@
-package net.jay.accounting.service;
+package net.jay.accounting.domain;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Account bean
@@ -9,23 +9,36 @@ import java.sql.Date;
  */
 public class Account {
 
+    // ACCOUNT TYPE
     public static final String LEAF_ACCOUNT = "LEAF";
     public static final String INNER_ACCOUNT = "INNER";
+
+    // ACCOUNT STATE
+    public static final String NORMAL_STATE = "NORMAL";
+    public static final String NOT_USE_STATE = "NOT_USE";
+
+    public Account(String id, String pId) {
+        this.id = id;
+        this.parentId = pId;
+    }
+
+    public Account() {}
 
     private String name;
     private String id;
     private String desc;
 
-    private String parentId;
-    private String parentName;
+    private String parentId;  // 父账户ID
+    private String parentName;  // 父账户名称
 
     private BigDecimal balance;
-    private String accountType;
+    private String accountType;  // 是否叶子节点
+    private String accountState; // 是否禁用
 
     private Date createTime;
     private Date updateTime;
 
-    private String accountState;
+
 
     public String getName() {
         return name;

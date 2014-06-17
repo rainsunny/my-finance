@@ -1,29 +1,26 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: wangjie
-  Date: 5/14/14
-  Time: 10:29 PM
+  Date: 6/11/14
+  Time: 7:44 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Echo</title>
+    <title>账户余额</title>
     <meta charset="UTF-8">
 </head>
 <body>
 
-<h2>Echo</h2>
 
-<p>echo ...</p>
-
-<div>
-    <a href="form" >Send message</a>
-</div>
+<h3>Account list</h3>
 
 <div>
-    <a href="list-messages">View all messages</a>
+    ${accounts}
+
 </div>
 
 </body>

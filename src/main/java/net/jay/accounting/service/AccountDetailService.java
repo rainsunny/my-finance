@@ -1,6 +1,6 @@
 package net.jay.accounting.service;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by wangjie on 6/8/14 8:09 PM.

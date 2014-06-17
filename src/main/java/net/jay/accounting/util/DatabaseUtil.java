@@ -1,4 +1,4 @@
-package net.jay.accounting.utils;
+package net.jay.accounting.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,5 +27,9 @@ public class DatabaseUtil {
         String password = props.getProperty("jdbc.password");
 
         return DriverManager.getConnection(url, username, password);
+    }
+
+    public static String generateId() {
+        return null;
     }
 }
