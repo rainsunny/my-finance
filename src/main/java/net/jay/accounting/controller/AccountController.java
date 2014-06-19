@@ -38,12 +38,12 @@ public class AccountController {
 
     @RequestMapping("/account/add-submit.htm")
     public String addAccount(@RequestParam String name,
-                           @RequestParam String desc,
-                           @RequestParam String parentId,
-                           @RequestParam BigDecimal balance,
-                           @RequestParam String accountType,
-                           Model model) {
-        
+                             @RequestParam String desc,
+                             @RequestParam String parentId,
+                             @RequestParam BigDecimal balance,
+                             @RequestParam String accountType,
+                             Model model) {
+
         // check required params
         if (StringUtils.isBlank(name) || StringUtils.isBlank(desc) || StringUtils.isBlank(accountType)) {
             model.addAttribute("errMsg", "Required parameters missing");
@@ -88,7 +88,6 @@ public class AccountController {
 
         return "redirect:/account?id=" + id;
     }
-
 
 
     // 查看某一个账户的信息

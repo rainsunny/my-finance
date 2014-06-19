@@ -1,6 +1,8 @@
 package net.jay.accounting.controller;
 
 
+import net.jay.accounting.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,9 @@ import java.util.Map;
 @Controller
 public class HelloController {
 
+    @Autowired
+    private AccountService accountService;
+
     @RequestMapping("/accounts/{accountId}")
     public String hello(@PathVariable String accountId, Map<String, Object> he) {
 
@@ -24,11 +29,13 @@ public class HelloController {
         return "hello";
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/hello.htm")
     public String echo(Model model) {
 
-        model.addAttribute("message", "Hello!");
+        accountService.updateTest();
 
-        return "echo";
+        model.addAttribute("name", "Jie");
+
+        return "hello";
     }
 }

@@ -1,5 +1,6 @@
 package net.jay.accounting.service;
 
+import net.jay.accounting.Update;
 import net.jay.accounting.domain.Account;
 import net.jay.accounting.persistence.AccountMapper;
 import net.jay.accounting.util.DateUtil;
@@ -17,6 +18,11 @@ public class AccountService {
 
     @Autowired
     private AccountMapper accountMapper;
+
+    @Update
+    public int updateTest() {
+        return 1;
+    }
 
     public Account getAccountById(String accountId) {
         return accountMapper.getAccount(accountId);
