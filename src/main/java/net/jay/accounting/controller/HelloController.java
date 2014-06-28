@@ -29,13 +29,17 @@ public class HelloController {
         return "hello";
     }
 
-    @RequestMapping("/hello.htm")
+    @RequestMapping("/hello")
     public String echo(Model model) {
-
-        accountService.updateTest();
 
         model.addAttribute("name", "Jie");
 
         return "hello";
+    }
+
+    @RequestMapping("/template")
+    public String template(Model model) {
+
+        return "account/add";
     }
 }

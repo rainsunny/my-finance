@@ -9,44 +9,22 @@ import java.util.Date;
  */
 public class Account {
 
-    // ACCOUNT TYPE
-    public static final String LEAF_ACCOUNT = "LEAF";
-    public static final String INNER_ACCOUNT = "INNER";
+    private String id; // primary key
+    private String name; // account name
 
-    // ACCOUNT STATE
-    public static final String NORMAL_STATE = "NORMAL";
-    public static final String NOT_USE_STATE = "NOT_USE";
+    private String desc; // account description
+    private Owner owner; // 拥有者
 
-    public Account(String id, String pId) {
-        this.id = id;
-        this.parentId = pId;
-    }
-
-    public Account() {}
-
-    private String name;
-    private String id;
-    private String desc;
-
-    private String parentId;  // 父账户ID
-    private String parentName;  // 父账户名称
+    private AccountType accountType;
+    private AccountSubType subType;
+    private String category;
 
     private BigDecimal balance;
-    private String accountType;  // 是否叶子节点
-    private String accountState; // 是否禁用
+
+    private AccountState accountState;
 
     private Date createTime;
     private Date updateTime;
-
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getId() {
         return id;
@@ -54,6 +32,14 @@ public class Account {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDesc() {
@@ -64,20 +50,36 @@ public class Account {
         this.desc = desc;
     }
 
-    public String getParentId() {
-        return parentId;
+    public Owner getOwner() {
+        return owner;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
-    public String getParentName() {
-        return parentName;
+    public AccountType getAccountType() {
+        return accountType;
     }
 
-    public void setParentName(String parentName) {
-        this.parentName = parentName;
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+    public AccountSubType getSubType() {
+        return subType;
+    }
+
+    public void setSubType(AccountSubType subType) {
+        this.subType = subType;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public BigDecimal getBalance() {
@@ -88,12 +90,12 @@ public class Account {
         this.balance = balance;
     }
 
-    public String getAccountType() {
-        return accountType;
+    public AccountState getAccountState() {
+        return accountState;
     }
 
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
+    public void setAccountState(AccountState accountState) {
+        this.accountState = accountState;
     }
 
     public Date getCreateTime() {
@@ -110,13 +112,5 @@ public class Account {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getAccountState() {
-        return accountState;
-    }
-
-    public void setAccountState(String accountState) {
-        this.accountState = accountState;
     }
 }

@@ -1,0 +1,97 @@
+<#import "../lib/my_macro.ftl" as my>
+<@my.html title="Account | Account Update">
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-6 col-md-offset-2">
+
+
+            <h2>Account Update</h2>
+
+            <form class="form-horizontal" role="form" method="post" action="/account/update-submit.htm">
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Account Name</label>
+
+                    <div class="col-md-8">
+                        <p class="form-control-static">${account.name}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Description</label>
+
+                    <div class="col-md-8">
+                        <p class="form-control-static">${account.desc}</p>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Owner</label>
+
+                    <div class="col-md-8">
+                        <p class="form-control-static">${account.owner.desc}</p>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Account Type</label>
+
+                    <div class="col-md-8">
+                        <p class="form-control-static">${account.accountType.desc}</p>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Account Sub Type</label>
+
+                    <div class="col-md-8">
+                        <p class="form-control-static">${account.subType.desc}</p>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Balance</label>
+
+                    <div class="col-md-8">
+                        <input class="form-control" type="number" name="balance" value="${account.balance}"/>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Account State</label>
+
+                    <div class="col-md-8">
+                        <select name="state">
+                            <#list states as s>
+                                <option value="${s}" <#if account.accountState == s>selected="selected"</#if> >${s.desc}</option>
+                            </#list>
+                        </select>
+                    </div>
+
+                </div>
+
+                <input type="hidden" name="id" value="${account.id}"/>
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <button class="btn btn-default" type="submit">Update Account</button>
+                    </div>
+
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+</@my.html>

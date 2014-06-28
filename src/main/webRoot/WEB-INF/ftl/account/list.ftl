@@ -1,64 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="/favicon.ico">
+<#import "../lib/my_macro.ftl" as my>
+<@my.html title="Account | Account List">
 
-    <title>Dashboard Template for Bootstrap</title>
-
-    <link href="/css/bootstrap.css" rel="stylesheet">
-    <link href="/css/dashboard.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-<#include "../header.ftl">
-
-<div class="container-fluid">
+<div class="container">
     <div class="row">
+        <div class="col-md-8 col-md-offset-2">
 
-        <#include "../sidebar.ftl">
+            <h2>Account List</h2>
 
-        <#assign seq = ["1,001", "Lorem", "ipsum", "dolor", "sit"]>
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Accounts Balance</h1>
-
-            <h2 class="sub-header">Section title</h2>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
+            <table class="table">
+                <tr>
+                    <th>Account Type</th>
+                    <th>Sub Type</th>
+                    <th>Account Name</th>
+                    <th>Balance</th>
+                    <th>Category</th>
+                    <th>Operation</th>
+                </tr>
+                <#list accounts as ac>
                     <tr>
-                        <th>#</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
+                        <td>${ac.accountType.desc}</td>
+                        <td>${ac.subType.desc}</td>
+                        <td>${ac.name}</td>
+                        <td class="text-right">${ac.balance?string(",##0.00")}</td>
+                        <td>${ac.category!""}</td>
+                        <td><a href="/account/detail.htm?id=${ac.id}">View</a></td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <#list 1..10 as i>
-                    <tr>
-                        <td>${seq[0]}</td>
-                        <td>${seq[1]}</td>
-                        <td>${seq[2]}</td>
-                        <td>${seq[3]}</td>
-                        <td>${seq[4]}</td>
-                    </tr>
-                    </#list>
-                    </tbody>
-                </table>
-            </div>
+                </#list>
+
+            </table>
+
         </div>
     </div>
 </div>
 
-<script src="/js/jquery-1.11.1.min.js"></script>
-<script src="/js/bootstrap.js"></script>
-</body>
-</html>
+
+</@my.html>

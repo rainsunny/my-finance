@@ -16,9 +16,5 @@ public interface AccountMapper {
 
     List<Account> getAccountsBy(@Param("type")String type, @Param("state")String state);
 
-    int deleteAccount(String accountId);
-
     int updateAccount(Account account);
-
-    long accountSeqNextVal();
 }

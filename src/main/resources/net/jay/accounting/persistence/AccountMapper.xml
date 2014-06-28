@@ -8,9 +8,11 @@
         <id property="id" column="account_id" />
         <result property="name" column="account_name" />
         <result property="desc" column="description" />
-        <result property="parentId" column="parent_id" />
         <result property="balance" column="balance" />
+        <result property="owner" column="owner" />
         <result property="accountType" column="account_type" />
+        <result property="subType" column="sub_type" />
+        <result property="category" column="category" />
         <result property="accountState" column="account_state" />
         <result property="createTime" column="create_time" />
         <result property="updateTime" column="update_time" />
@@ -18,10 +20,11 @@
 
     <insert id="insertAccount" parameterType="Account">
         insert into tb_account
-        (account_id, account_name, description, balance, parent_id, account_type, create_time, account_state)
+        (account_name, description, balance, owner,
+        account_type, sub_type, category, account_state, create_time, update_time)
         values
-        (#{id}, #{name}, #{desc, jdbcType=VARCHAR}, #{balance}, #{parentId, jdbcType=VARCHAR},
-        #{accountType}, #{createTime}, #{accountState})
+        (#{name}, #{desc, jdbcType=VARCHAR}, #{balance}, #{owner},
+        #{accountType}, #{subType}, #{category, jdbcType=VARCHAR}, #{accountState}, now(), now())
     </insert>
 
     <select id="getAccount" parameterType="string" resultMap="accountMap">
@@ -36,22 +39,12 @@
         <if test="state != null">
             and account_state = #{state}
         </if>
+        order by account_type, sub_type, account_name
     </select>
-
-    <delete id="deleteAccount" parameterType="string">
-        delete from tb_account where account_id = #{accountId}
-    </delete>
 
     <update id="updateAccount" parameterType="Account">
-        update tb_account
-        set account_name = #{name}, description = #{desc}, balance = #{balance},
-        parent_id = #{parentId, jdbcType=VARCHAR},
-        account_type = #{accountType}, account_state = #{accountState}
+        update tb_account set balance = #{balance}, account_state = #{accountState}
         where account_id = #{id}
     </update>
-
-    <select id="accountSeqNextVal" resultType="long">
-        select nextval('account_seq')
-    </select>
 
 </mapper>

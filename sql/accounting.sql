@@ -1,68 +1,76 @@
 -- create database
-create database accounting;
+CREATE DATABASE accounting;
 
 -- create tables
 -- account table
-
-create table tb_account
+DROP TABLE IF EXISTS tb_account;
+CREATE TABLE tb_account
 (
-account_id varchar(20) primary key,
-account_name varchar(100) not null,
-description varchar(300),
-balance double (12, 2),
-parent_id varchar(20),
-account_type varchar(20) not null,
-account_state varchar(20) not null,
-create_time datetime,
-update_time datetime
+  account_id    SERIAL,
+  account_name  VARCHAR(100) NOT NULL,
+  description   VARCHAR(300),
+  balance       DOUBLE(12, 2),
+  owner         VARCHAR(20)  NOT NULL,
+  account_type  VARCHAR(20)  NOT NULL,
+  sub_type      VARCHAR(20)  NOT NULL,
+  category      VARCHAR(200),
+  account_state VARCHAR(20)  NOT NULL,
+  create_time   DATETIME,
+  update_time   DATETIME,
+  PRIMARY KEY (account_id)
 );
 
 -- account detail table
-create table tb_account_detail
+DROP TABLE IF EXISTS tb_account_detail;
+CREATE TABLE tb_account_detail
 (
-detail_id serial primary key,
-account_id varchar(20) not null,
-debit_credit tinyint(1) not null, -- 0 debit 出账,  1 credit 进账
-operation_amount double (12,2) not null,
-account_balance double (12,2) not null,
-create_time datetime,
-update_time datetime
+  detail_id        SERIAL,
+  account_id       VARCHAR(20)   NOT NULL,
+  debit_credit     TINYINT(1)    NOT NULL, -- 0 debit 出账,  1 credit 进账
+  operation_amount DOUBLE(12, 2) NOT NULL,
+  account_balance  DOUBLE(12, 2) NOT NULL,
+  create_time      DATETIME,
+  update_time      DATETIME,
+  PRIMARY KEY (detail_id)
 );
 
 
 -- sequence
 DROP TABLE IF EXISTS sequence;
 CREATE TABLE sequence (
-name              VARCHAR(50) NOT NULL,
-current_value INT NOT NULL,
-increment       INT NOT NULL DEFAULT 1,
-PRIMARY KEY (name)
-) ENGINE=InnoDB;
+  name          VARCHAR(50) NOT NULL,
+  current_value INT         NOT NULL,
+  increment     INT         NOT NULL DEFAULT 1,
+  PRIMARY KEY (name)
+)
+  ENGINE =InnoDB;
 -- INSERT INTO sequence VALUES ('MovieSeq',3,5);
 
 DROP FUNCTION IF EXISTS currval;
 DELIMITER $
-CREATE FUNCTION currval (seq_name VARCHAR(50))
-RETURNS INTEGER
+CREATE FUNCTION currval(seq_name VARCHAR(50))
+  RETURNS INTEGER
 CONTAINS SQL
-BEGIN
-  DECLARE value INTEGER;
-  SET value = 0;
-  SELECT current_value INTO value
-  FROM sequence
-  WHERE name = seq_name;
-  RETURN value;
-END$
+  BEGIN
+    DECLARE value INTEGER;
+    SET value = 0;
+    SELECT
+      current_value
+    INTO value
+    FROM sequence
+    WHERE name = seq_name;
+    RETURN value;
+  END$
 DELIMITER ;
 
 DROP FUNCTION IF EXISTS nextval;
 DELIMITER $
-CREATE FUNCTION nextval (seq_name VARCHAR(50))
+CREATE FUNCTION nextval(seq_name VARCHAR(50))
   RETURNS INTEGER
 CONTAINS SQL
   BEGIN
     UPDATE sequence
-    SET          current_value = current_value + increment
+    SET current_value = current_value + increment
     WHERE name = seq_name;
     RETURN currval(seq_name);
   END$
@@ -70,16 +78,16 @@ DELIMITER ;
 
 DROP FUNCTION IF EXISTS setval;
 DELIMITER $
-CREATE FUNCTION setval (seq_name VARCHAR(50), value INTEGER)
+CREATE FUNCTION setval(seq_name VARCHAR(50), value INTEGER)
   RETURNS INTEGER
 CONTAINS SQL
   BEGIN
     UPDATE sequence
-    SET          current_value = value
+    SET current_value = value
     WHERE name = seq_name;
     RETURN currval(seq_name);
   END$
 DELIMITER ;
 
 -- sequence for account_id
-insert into sequence values ('account_seq', 0, 1);
+INSERT INTO sequence VALUES ('account_seq', 0, 1);
